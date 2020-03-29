@@ -22,9 +22,10 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserEntity> user = userRepository.findByUsername(username);
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found "+ username));
+        user.orElseThrow(() -> new UsernameNotFoundException("Not found " + username));
         MyUserDetail userDetail = user.map(MyUserDetail::new).get();
-        return new User(userDetail.getUsername(), userDetail.getPassword(),
-                userDetail.getAuthorities());
+        return userDetail;
+//        return new User(userDetail.getUsername(), userDetail.getPassword(),
+//                userDetail.getAuthorities());
     }
 }

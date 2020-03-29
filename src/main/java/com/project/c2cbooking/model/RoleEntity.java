@@ -5,23 +5,24 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "role")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserEntity {
+public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "role_id")
     int id;
-    @Column(name = "username")
-    String username;
-    @Column(name = "password")
-    String password;
-    @ManyToOne
-    @JoinColumn(name = "role")
-    RoleEntity role;
 
+    @Column(name = "role_name")
+    String roleName;
 
+    @Column(name = "del_flag")
+    int delFlag;
+
+    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
+    List<UserEntity> userEntities;
 }
