@@ -8,21 +8,27 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "role")
+@Table(name = "amenity")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoleEntity {
+public class AmenityEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @Column(name = "amenity_id")
     Integer id;
 
-    @Column(name = "role_name")
-    String roleName;
+    @Column(name = "name")
+    String name;
+
+    @Column(name = "icon_url")
+    String iconUrl;
 
     @Column(name = "del_flag")
     Integer delFlag;
 
-    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
-    List<UserEntity> userEntities;
+    @OneToMany(mappedBy = "amenityEntity")
+    List<RoomAmenityEntity> amenityEntities;
+
+
 }
