@@ -1,17 +1,21 @@
 package com.project.c2cbooking.model.location;
 
+import com.project.c2cbooking.model.Auditable;
 import com.project.c2cbooking.model.RoomEntity;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "location")
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LocationEntity {
+public class LocationEntity  extends Auditable<String> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id")

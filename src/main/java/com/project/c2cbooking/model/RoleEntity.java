@@ -1,7 +1,6 @@
 package com.project.c2cbooking.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -9,9 +8,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "role")
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoleEntity {
+public class RoleEntity extends Auditable<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
