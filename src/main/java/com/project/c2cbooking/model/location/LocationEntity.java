@@ -1,5 +1,6 @@
-package com.project.c2cbooking.model;
+package com.project.c2cbooking.model.location;
 
+import com.project.c2cbooking.model.RoomEntity;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -22,14 +23,12 @@ public class LocationEntity {
     @Column(name = "lng")
     String lng;
 
-    @Column(name = "country")
-    String country;
-
-    @Column(name = "city")
-    String city;
-
     @Column(name = "street")
     String street;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    CityEntity cityEntity;
 
     @Column(name = "del_flag")
     Integer delFlag;

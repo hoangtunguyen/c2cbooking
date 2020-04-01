@@ -1,5 +1,6 @@
 package com.project.c2cbooking.model;
 
+import com.project.c2cbooking.model.location.LocationEntity;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
