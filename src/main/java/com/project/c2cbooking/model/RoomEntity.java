@@ -53,8 +53,6 @@ public class RoomEntity {
     RoomTypeEntity roomTypeEntity;
 
 
-//    @Column(name = "avaialbility_type")
-
     @Column(name = "description")
     String description;
 
@@ -71,5 +69,7 @@ public class RoomEntity {
     @OneToMany(mappedBy = "roomEntity")
     List<RoomAmenityEntity> roomAmenityEntities;
 
+    @OneToMany(mappedBy = "roomEntity")
+    List<BookingEntity> bookingEntities;
 
 }

@@ -25,7 +25,6 @@ public class ReviewEntity {
     @JoinColumn(name = "room_id")
     RoomEntity roomEntity;
 
-
     @Column(name = "comment")
     String comment;
 

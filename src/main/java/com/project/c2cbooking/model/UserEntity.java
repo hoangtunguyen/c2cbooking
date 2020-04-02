@@ -27,8 +27,6 @@ public class UserEntity {
     RoleEntity role;
     @Column(name = "del_flag")
     Integer delFlag;
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    List<PhotoEntity> photoEntities;
 
     @OneToMany(mappedBy = "userEntity")
     List<RoomEntity> roomEntities;
@@ -36,5 +34,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "userEntity")
     List<ReviewEntity> reviewEntities;
 
-
+    @OneToMany(mappedBy = "userEntity")
+    List<BookingEntity> bookingEntities;
 }
