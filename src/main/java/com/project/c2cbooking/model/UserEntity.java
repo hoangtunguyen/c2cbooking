@@ -2,8 +2,6 @@ package com.project.c2cbooking.model;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -11,10 +9,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-@Getter
-@Setter
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserEntity extends Auditable<String>{
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -39,6 +36,5 @@ public class UserEntity extends Auditable<String>{
     @OneToMany(mappedBy = "userEntity")
     List<ReviewEntity> reviewEntities;
 
-    @OneToMany(mappedBy = "userEntity")
-    List<BookingEntity> bookingEntities;
+
 }

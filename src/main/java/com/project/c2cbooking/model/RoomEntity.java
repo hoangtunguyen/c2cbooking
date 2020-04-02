@@ -3,8 +3,6 @@ package com.project.c2cbooking.model;
 import com.project.c2cbooking.model.location.LocationEntity;
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -13,10 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "room")
-@Setter
-@Getter
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomEntity extends Auditable<String>{
+public class RoomEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +52,9 @@ public class RoomEntity extends Auditable<String>{
     @JoinColumn(name = "room_type_id")
     RoomTypeEntity roomTypeEntity;
 
+
+//    @Column(name = "avaialbility_type")
+
     @Column(name = "description")
     String description;
 
@@ -71,6 +71,5 @@ public class RoomEntity extends Auditable<String>{
     @OneToMany(mappedBy = "roomEntity")
     List<RoomAmenityEntity> roomAmenityEntities;
 
-    @OneToMany(mappedBy = "roomEntity")
-    List<BookingEntity> bookingEntities;
+
 }
