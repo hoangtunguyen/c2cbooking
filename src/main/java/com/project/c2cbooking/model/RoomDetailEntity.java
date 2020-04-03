@@ -28,8 +28,6 @@ public class RoomDetailEntity{
     @Column(name = "bathroom_count")
     Integer bathroomCount;
 
-    @Column(name = "acomodate_count")
-    Integer accomodateCount;
 
     @Column(name = "del_flag")
     Integer delFlag;
