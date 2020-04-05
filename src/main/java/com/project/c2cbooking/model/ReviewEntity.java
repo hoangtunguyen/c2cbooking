@@ -29,7 +29,7 @@ public class ReviewEntity {
     String comment;
 
     @Column(name = "rating")
-    BigDecimal rating;
+    Integer rating;
 
     @Column(name = "del_flag")
     Integer delFlag;

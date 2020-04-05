@@ -2,7 +2,10 @@ package com.project.c2cbooking.controller;
 
 import com.project.c2cbooking.request.AuthenticationRequest;
 import com.project.c2cbooking.response.AuthenticationResponse;
+import com.project.c2cbooking.response.RoomResponse;
 import com.project.c2cbooking.service.MyUserDetailService;
+import com.project.c2cbooking.service.RoomService;
+import com.project.c2cbooking.service.imp.RoomServiceImp;
 import com.project.c2cbooking.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class HomeController {
@@ -22,10 +27,11 @@ public class HomeController {
 
     @Autowired
     private JwtUtil  jwtUtil;
-
+    @Autowired
+    private RoomServiceImp roomServiceImp;
     @GetMapping("/")
-    public String home(){
-        return ("<h1>Welcome</h1");
+    public ResponseEntity<List<RoomResponse>> home(){
+        return ResponseEntity.ok(roomServiceImp.topFavoriteRooms(4));
     }
     @GetMapping("/user")
     public String user(){
