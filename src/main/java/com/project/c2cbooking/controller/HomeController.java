@@ -31,7 +31,7 @@ public class HomeController {
     private RoomServiceImp roomServiceImp;
     @GetMapping("/")
     public ResponseEntity<List<RoomResponse>> home(){
-        return ResponseEntity.ok(roomServiceImp.topFavoriteRooms(4));
+        return ResponseEntity.ok(roomServiceImp.topFavoriteRooms(5));
     }
     @GetMapping("/user")
     public String user(){

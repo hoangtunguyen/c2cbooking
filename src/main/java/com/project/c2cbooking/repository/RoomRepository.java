@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RoomRepository extends JpaRepository<RoomEntity, Integer> {
-    @Query(value = "SELECT * FROM room u", nativeQuery = true)
-    List<RoomEntity> findRooms();
+    @Query(value = "SELECT * FROM c2cbooking.review r RIGHT join c2cbooking.room ro ON ro.room_id = r.room_id group by r.room_id order by avg(r.rating) desc limit :topQuantity", nativeQuery = true)
+    List<RoomEntity> findTopFavoritesLimit(@Param("topQuantity") Integer quantity);
 }

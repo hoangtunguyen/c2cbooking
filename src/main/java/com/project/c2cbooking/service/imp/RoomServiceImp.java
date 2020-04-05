@@ -19,7 +19,7 @@ public class RoomServiceImp implements RoomService {
 
     @Override
     public List<RoomResponse> topFavoriteRooms(Integer count) {
-        List<RoomEntity> roomEntities = roomRepository.findRooms();
+        List<RoomEntity> roomEntities = roomRepository.findTopFavoritesLimit(count);
         return roomEntities.stream().map(RoomConvert::convert).collect(Collectors.toList());
     }
 }
