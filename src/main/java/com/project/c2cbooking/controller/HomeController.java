@@ -30,8 +30,13 @@ public class HomeController {
     @Autowired
     private RoomServiceImp roomServiceImp;
     @GetMapping("/")
-    public ResponseEntity<List<RoomResponse>> home(){
+    public ResponseEntity<?> home(){
         return ResponseEntity.ok(roomServiceImp.topFavoriteRooms(5));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findOneRoom(@PathVariable Integer id){
+        return ResponseEntity.ok(roomServiceImp.findOneRoom(id));
     }
     @GetMapping("/user")
     public String user(){

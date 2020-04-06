@@ -11,4 +11,6 @@ import java.util.List;
 public interface RoomRepository extends JpaRepository<RoomEntity, Integer> {
     @Query(value = "SELECT * FROM c2cbooking.review r RIGHT join c2cbooking.room ro ON ro.room_id = r.room_id group by r.room_id order by avg(r.rating) desc limit :topQuantity", nativeQuery = true)
     List<RoomEntity> findTopFavoritesLimit(@Param("topQuantity") Integer quantity);
+
+    RoomEntity findByIdEquals(Integer id);
 }
