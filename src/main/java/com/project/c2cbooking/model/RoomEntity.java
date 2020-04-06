@@ -72,4 +72,6 @@ public class RoomEntity {
     @OneToMany(mappedBy = "roomEntity")
     List<BookingEntity> bookingEntities;
 
+    @OneToMany(mappedBy = "roomEntity")
+    List<FavoriteRoomEntity> favoriteRoomEntities;
 }

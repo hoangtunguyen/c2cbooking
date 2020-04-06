@@ -36,4 +36,7 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity")
     List<BookingEntity> bookingEntities;
+
+    @OneToMany(mappedBy = "userEntity")
+    List<FavoriteRoomEntity> favoriteRoomEntities;
 }
