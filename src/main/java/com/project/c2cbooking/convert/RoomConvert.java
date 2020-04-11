@@ -2,6 +2,7 @@ package com.project.c2cbooking.convert;
 
 import com.project.c2cbooking.model.ReviewEntity;
 import com.project.c2cbooking.model.RoomEntity;
+import com.project.c2cbooking.response.AmenityResponse;
 import com.project.c2cbooking.response.RoomFullResponse;
 import com.project.c2cbooking.response.RoomResponse;
 
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class RoomConvert {
     public static RoomResponse convert(RoomEntity roomEntity) {
@@ -36,10 +38,12 @@ public class RoomConvert {
         roomFullResponse.setLat(roomEntity.getLocationEntity().getLat());
         roomFullResponse.setLng(roomEntity.getLocationEntity().getLng());
         roomFullResponse.setOwnerName(roomEntity.getUserEntity().getUsername());
+        roomFullResponse.setAmenityResponseList(roomEntity.getRoomAmenityEntities().stream().map(AmenityConvert::convert).collect(Collectors.toList()));
+        roomFullResponse.setRoomDetailResponse(RoomDetailConvert.convert(roomEntity.getRoomDetailEntity()));
         return roomFullResponse;
     }
     public static String getAddress(RoomEntity roomEntity){
-        return roomEntity.getLocationEntity().getStreet() + " "+roomEntity.getLocationEntity().getCityEntity().getName();
+        return roomEntity.getLocationEntity().getStreet() + ", "+roomEntity.getLocationEntity().getCityEntity().getName();
     }
     public static double avgRating(RoomEntity roomEntities) {
         int sum = 0;

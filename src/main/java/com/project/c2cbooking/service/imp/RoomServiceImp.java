@@ -1,8 +1,11 @@
 package com.project.c2cbooking.service.imp;
 
+import com.project.c2cbooking.convert.AmenityConvert;
 import com.project.c2cbooking.convert.RoomConvert;
+import com.project.c2cbooking.model.AmenityEntity;
 import com.project.c2cbooking.model.RoomEntity;
 import com.project.c2cbooking.repository.RoomRepository;
+import com.project.c2cbooking.response.AmenityResponse;
 import com.project.c2cbooking.response.RoomFullResponse;
 import com.project.c2cbooking.response.RoomResponse;
 import com.project.c2cbooking.service.RoomService;
