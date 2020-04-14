@@ -21,5 +21,7 @@ public class RoomFullResponse {
     String lng;
     RoomDetailResponse roomDetailResponse;
     String ownerName;
+    Integer minGuestCount;
+    String increasingPrice;
     List<AmenityResponse> amenityResponseList;
 }

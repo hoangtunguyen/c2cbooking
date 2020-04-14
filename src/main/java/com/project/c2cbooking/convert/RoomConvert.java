@@ -40,6 +40,8 @@ public class RoomConvert {
         roomFullResponse.setOwnerName(roomEntity.getUserEntity().getUsername());
         roomFullResponse.setAmenityResponseList(roomEntity.getRoomAmenityEntities().stream().map(AmenityConvert::convert).collect(Collectors.toList()));
         roomFullResponse.setRoomDetailResponse(RoomDetailConvert.convert(roomEntity.getRoomDetailEntity()));
+        roomFullResponse.setMinGuestCount(roomEntity.getMinGuestCount());
+        roomFullResponse.setIncreasingPrice(roomEntity.getFeeIncreasingPerson().toString());
         return roomFullResponse;
     }
     public static String getAddress(RoomEntity roomEntity){

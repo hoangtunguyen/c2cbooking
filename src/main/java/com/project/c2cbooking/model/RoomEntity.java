@@ -56,6 +56,11 @@ public class RoomEntity {
     @Column(name = "description")
     String description;
 
+    @Column(name = "min_guest_count")
+    Integer minGuestCount;
+
+    @Column(name = "fee_increasing_person")
+    BigDecimal feeIncreasingPerson;
 
     @Column(name = "del_flag")
     Integer delFlag;
