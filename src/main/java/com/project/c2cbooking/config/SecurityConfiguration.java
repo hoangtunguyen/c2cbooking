@@ -34,14 +34,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
         http.authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/").permitAll()
-                .and().formLogin();
+                .antMatchers("/").permitAll();
+//                .and().formLogin().loginPage("/login").permitAll();
         http.csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/authenticate").permitAll()
                     .antMatchers("/").permitAll()
+                    .antMatchers("/login").permitAll()
                     .anyRequest().authenticated()
-                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 
         http.addFilterBefore(jwtRequestFillter, UsernamePasswordAuthenticationFilter.class);
 

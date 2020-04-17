@@ -14,6 +14,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 @Component
 public class JwtRequestFillter extends OncePerRequestFilter {
@@ -28,9 +29,15 @@ public class JwtRequestFillter extends OncePerRequestFilter {
         final String authorizationHeader = request.getHeader("Authorization");
         String username = null;
         String jwt = null;
+        final HttpSession session = request.getSession();
+        System.out.println(session.getAttribute("jwts"));
 
         if (null != authorizationHeader && authorizationHeader.startsWith("Bearer ")){
             jwt = authorizationHeader.substring(7);
+            username = jwtUtil.extractUsername(jwt);
+
+        }else {
+            jwt = (String) session.getAttribute("jwts");
             username = jwtUtil.extractUsername(jwt);
 
         }
@@ -47,5 +54,8 @@ public class JwtRequestFillter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
 
+
     }
+
+
 }
