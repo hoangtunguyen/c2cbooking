@@ -32,4 +32,10 @@ public class RoomServiceImp implements RoomService {
         RoomEntity roomEntity = roomRepository.findByIdEquals(idRoom);
         return RoomConvert.convertFullData(roomEntity);
     }
+
+    @Override
+    public List<RoomResponse> viewAllRooms() {
+        List<RoomEntity> roomEntities = roomRepository.findAll();
+        return roomEntities.stream().map(RoomConvert::convert).collect(Collectors.toList());
+    }
 }

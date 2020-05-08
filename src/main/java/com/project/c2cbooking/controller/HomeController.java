@@ -21,17 +21,7 @@ public class HomeController {
 //
 //    @Autowired
 //    private JwtUtil  jwtUtil;
-    @Autowired
-    private RoomServiceImp roomServiceImp;
-    @GetMapping("/")
-    public ResponseEntity<?> home(){
-        return ResponseEntity.ok(roomServiceImp.topFavoriteRooms(5));
-    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findOneRoom(@PathVariable Integer id){
-        return ResponseEntity.ok(roomServiceImp.findOneRoom(id));
-    }
     @GetMapping("/user")
     public String user(){
         return ("<h1>User</h1");
