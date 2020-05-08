@@ -26,7 +26,7 @@ public class PaypalController {
     @PostMapping("/pay")
     public String payment() {
         try {
-            Payment payment = paypalService.createPayment(20.00, "USD", "paypal",
+            Payment payment = paypalService.createPayment(30.00, "USD", "paypal",
                     "sale", "nothing", "http://localhost:8080/" + CANCEL_URL,
                     "http://localhost:8080/" + SUCCESS_URL);
             for(Links link:payment.getLinks()) {
