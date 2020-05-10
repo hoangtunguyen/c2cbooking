@@ -49,6 +49,12 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
+	// https://mvnrepository.com/artifact/com.stripe/stripe-java
+	compile group: 'com.stripe', name: 'stripe-java', version: '4.4.0'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.2.7.RELEASE', ext: 'pom'
+
+
 }
 
 test {
