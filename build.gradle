@@ -47,6 +47,12 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
+	compile group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.14.0'
+
 }
 
 test {
