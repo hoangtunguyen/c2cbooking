@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @Controller
 public class PaypalController {
     @Autowired
      PaypalService paypalService;
 
-    @Value("${ip.computer}")
-    String ipComputer;
+//    @Value("${ip.computer}")
+//    String ipComputer;
     public static final String SUCCESS_URL = "pay/success";
     public static final String CANCEL_URL = "pay/cancel";
 
@@ -27,7 +30,10 @@ public class PaypalController {
     }
 
     @PostMapping("/pay")
-    public String payment() {
+    public String payment() throws UnknownHostException {
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        String ipComputer = inetAddress.getHostAddress();
+        System.out.println("IP ADDRESS: "+ipComputer);
         try {
             Payment payment = paypalService.createPayment(30.00, "USD", "paypal",
                     "sale", "nothing", "http://"+ipComputer+":8080/" + CANCEL_URL,
