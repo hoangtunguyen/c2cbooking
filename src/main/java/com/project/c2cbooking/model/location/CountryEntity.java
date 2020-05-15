@@ -20,8 +20,8 @@ public class CountryEntity {
     @Column(name = "name")
     String name;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @OneToMany(mappedBy = "countryEntity")
     List<CityEntity> cityEntities;

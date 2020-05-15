@@ -25,6 +25,6 @@ public class RoomAmenityEntity {
     @JoinColumn(name = "amenity_id")
     AmenityEntity amenityEntity;
 
-    @Column(name = "del_flag")
-    Integer del_flag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean del_flag;
 }

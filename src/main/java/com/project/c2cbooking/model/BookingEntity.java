@@ -50,7 +50,7 @@ public class BookingEntity {
     @Column(name = "is_paid")
     Boolean isPaid;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
 }

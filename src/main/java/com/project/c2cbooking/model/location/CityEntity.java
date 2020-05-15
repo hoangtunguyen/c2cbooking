@@ -20,8 +20,8 @@ public class CityEntity {
     @Column(name = "name")
     String name;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @ManyToOne
     @JoinColumn(name = "country_id")

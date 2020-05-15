@@ -31,8 +31,8 @@ public class ReviewEntity {
     @Column(name = "rating")
     Integer rating;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
 
 }

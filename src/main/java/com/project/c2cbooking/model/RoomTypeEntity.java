@@ -24,8 +24,8 @@ public class RoomTypeEntity {
     @Column(name = "url_icon")
     String urlIcon;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @OneToMany(mappedBy = "roomTypeEntity")
     List<CategoryEntity> categoryEntities;

@@ -24,8 +24,8 @@ public class PhotoEntity {
     @Column(name = "decription")
     String description;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
 
     @ManyToOne

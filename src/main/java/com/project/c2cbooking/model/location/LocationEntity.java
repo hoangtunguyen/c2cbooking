@@ -30,8 +30,8 @@ public class LocationEntity {
     @JoinColumn(name = "city_id")
     CityEntity cityEntity;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "locationEntity")
     RoomEntity roomEntity;

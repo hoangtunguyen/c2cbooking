@@ -39,7 +39,7 @@ public class BookingServiceImp implements BookingService {
         booking.setInfantCount(bookingRequest.getInfantCount());
         booking.setGuestCount(bookingRequest.getGuestCount());
         booking.setIsPaid(false);
-        booking.setDelFlag(0);
+        booking.setDelFlag(false);
 
         bookingRepository.save(booking);
     }

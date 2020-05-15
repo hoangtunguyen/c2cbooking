@@ -29,8 +29,8 @@ public class RoomDetailEntity{
     Integer bathroomCount;
 
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roomDetailEntity")
     RoomEntity roomEntity;

@@ -57,8 +57,8 @@ public class RoomEntity {
     @Column(name = "fee_increasing_person")
     BigDecimal feeIncreasingPerson;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @OneToMany(mappedBy = "roomEntity")
     List<PhotoEntity> photoEntities;

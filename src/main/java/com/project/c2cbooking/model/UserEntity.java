@@ -25,8 +25,8 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "role")
     RoleEntity role;
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @OneToMany(mappedBy = "userEntity")
     List<RoomEntity> roomEntities;

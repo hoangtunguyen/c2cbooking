@@ -21,8 +21,8 @@ public class CategoryEntity {
     String name;
 
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 
     @ManyToOne
     @JoinColumn(name = "room_type_id")

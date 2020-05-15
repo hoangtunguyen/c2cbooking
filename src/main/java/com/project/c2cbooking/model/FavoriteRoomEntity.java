@@ -29,6 +29,6 @@ public class FavoriteRoomEntity {
     @JoinColumn(name = "user_id")
     UserEntity userEntity;
 
-    @Column(name = "del_flag")
-    Integer delFlag;
+    @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
+    Boolean delFlag;
 }
