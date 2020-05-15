@@ -11,7 +11,7 @@ import java.util.List;
 public class RoomFullResponse {
     Integer id;
     String name;
-    String typeRoom;
+    String categoryRoom;
     String votedCount;
     String rating;
     String price;

@@ -12,5 +12,7 @@ public class BookingRequest {
     String bookingDate;
     Integer roomId;
     Integer userId;
+    Integer infantCount;
+    Integer guestCount;
     String totalCost;
 }

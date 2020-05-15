@@ -21,13 +21,13 @@ public class RoomTypeEntity {
     @Column(name = "name")
     String name;
 
-    @Column(name = "tag")
-    String tag;
+    @Column(name = "url_icon")
+    String urlIcon;
 
     @Column(name = "del_flag")
     Integer delFlag;
 
     @OneToMany(mappedBy = "roomTypeEntity")
-    List<RoomEntity> roomEntities;
+    List<CategoryEntity> categoryEntities;
 
 }

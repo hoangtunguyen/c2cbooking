@@ -36,6 +36,9 @@ public class BookingServiceImp implements BookingService {
         booking.setUserEntity(user);
         RoomEntity room = roomRepository.findById(bookingRequest.getRoomId()).get();
         booking.setRoomEntity(room);
+        booking.setInfantCount(bookingRequest.getInfantCount());
+        booking.setGuestCount(bookingRequest.getGuestCount());
+        booking.setIsPaid(false);
         booking.setDelFlag(0);
 
         bookingRepository.save(booking);

@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 public class RoomResponse {
     Integer id;
     String name;
-    String typeRoom;
+    String categoryRoom;
     String votedCount;
     String rating;
     String price;

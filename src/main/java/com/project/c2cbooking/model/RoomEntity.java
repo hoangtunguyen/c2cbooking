@@ -26,8 +26,8 @@ public class RoomEntity {
     @Column(name = "price")
     BigDecimal price;
 
-    @Column(name = "voted")
-    BigDecimal voted;
+    @Column(name = "service_fee")
+    BigDecimal serviceFee;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_detail_id", nullable = false, unique = true)
@@ -47,11 +47,6 @@ public class RoomEntity {
 
     @Column(name = "note")
     String note;
-
-    @ManyToOne
-    @JoinColumn(name = "room_type_id")
-    RoomTypeEntity roomTypeEntity;
-
 
     @Column(name = "description")
     String description;

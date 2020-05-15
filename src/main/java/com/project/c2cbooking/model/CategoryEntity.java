@@ -20,12 +20,16 @@ public class CategoryEntity {
     @Column(name = "name")
     String name;
 
-    @Column(name = "description")
-    String description;
 
     @Column(name = "del_flag")
     Integer delFlag;
 
+    @ManyToOne
+    @JoinColumn(name = "room_type_id")
+    RoomTypeEntity roomTypeEntity;
+
     @OneToMany(mappedBy = "categoryEntity")
     List<RoomEntity> roomEntities;
+
+
 }

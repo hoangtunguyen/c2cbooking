@@ -30,7 +30,6 @@ public class BookingEntity {
     @Column(name = "booking_date")
     Timestamp bookingDate;
 
-
     @ManyToOne
     @JoinColumn(name = "room_id")
     RoomEntity roomEntity;
@@ -42,11 +41,11 @@ public class BookingEntity {
     @Column(name = "total_cost")
     BigDecimal totalCost;
 
-    @Column(name = "is_refund")
-    Boolean isRefund;
+    @Column(name = "guest_count")
+    Integer guestCount;
 
-    @Column(name = "cancel_date")
-    Timestamp cancelDate;
+    @Column(name = "infant_count")
+    Integer infantCount;
 
     @Column(name = "is_paid")
     Boolean isPaid;
