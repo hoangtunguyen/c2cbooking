@@ -22,6 +22,6 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Integer> {
             "inner join ro.roomDetailEntity rd " +
             "inner join ro.locationEntity lo " +
             "inner join  ro.locationEntity.cityEntity lo_ci " +
-            "where rd.guestCount <= ?1 and (ro.price between  ?2  and  ?3) and (lo.street like %?4% or lo_ci.name like %?4%)")
-    List<RoomEntity> searchRoom(Integer guestCount, BigDecimal minPrice, BigDecimal maxPrice, String location);
+            "where rd.guestCount <= ?1 and (ro.price between  ?2  and  ?3) and (lo.street like %?4% or lo_ci.name like %?4%) and ro.name like %?5% ")
+    List<RoomEntity> searchRoom(Integer guestCount, BigDecimal minPrice, BigDecimal maxPrice, String location, String name);
 }

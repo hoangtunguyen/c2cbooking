@@ -44,13 +44,19 @@ public class RoomServiceImp implements RoomService {
     @Override
     public List<RoomResponse> searchRoom(RoomRequest roomRequest) {
 
+        roomRequest.setGuestCount(roomRequest.getGuestCount() == null ? Integer.MAX_VALUE : roomRequest.getGuestCount());
         roomRequest.setMaxPrice(roomRequest.getMaxPrice() == null ? Integer.MAX_VALUE : roomRequest.getMaxPrice());
         roomRequest.setMinPrice(roomRequest.getMinPrice() == null ? 0 : roomRequest.getMinPrice());
+        roomRequest.setLocation(roomRequest.getLocation() == null ? "" : roomRequest.getLocation());
+        roomRequest.setNameRoom(roomRequest.getNameRoom() == null ? "" : roomRequest.getNameRoom());
+
         List<RoomEntity> roomEntities = roomRepository.searchRoom(
                 roomRequest.getGuestCount(),
                 new BigDecimal(roomRequest.getMinPrice()),
                 new BigDecimal(roomRequest.getMaxPrice()),
-                roomRequest.getLocation());
+                roomRequest.getLocation(),
+                roomRequest.getNameRoom()
+                );
         return roomEntities.stream().map(RoomConvert::convert).collect(Collectors.toList());
     }
 }

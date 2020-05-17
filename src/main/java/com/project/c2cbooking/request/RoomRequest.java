@@ -8,4 +8,5 @@ public class RoomRequest {
     Integer minPrice;
     Integer maxPrice;
     String  location;
+    String nameRoom;
 }
