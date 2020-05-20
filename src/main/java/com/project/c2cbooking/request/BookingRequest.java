@@ -15,4 +15,5 @@ public class BookingRequest {
     Integer infantCount;
     Integer guestCount;
     String totalCost;
+    Boolean isPaid;
 }

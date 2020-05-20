@@ -4,6 +4,7 @@ import com.project.c2cbooking.model.FavoriteRoomEntity;
 import com.project.c2cbooking.request.BookingRequest;
 import com.project.c2cbooking.request.FavoriteRequest;
 import com.project.c2cbooking.request.RoomRequest;
+import com.project.c2cbooking.response.BookingResponse;
 import com.project.c2cbooking.response.FavoriteResponse;
 import com.project.c2cbooking.response.RoomResponse;
 import com.project.c2cbooking.service.imp.BookingServiceImp;
@@ -72,6 +73,12 @@ public class RoomController {
         }catch (Exception e){
             return ("Exception: " + e);
         }
+    }
+
+    @GetMapping("/booking/user/{userId}")
+    public ResponseEntity<?> getBookingByUserId(@PathVariable Integer userId){
+            List<BookingResponse> responses = bookingServiceImp.getBookingByUserId(userId);
+            return ResponseEntity.ok(responses);
     }
 
 }

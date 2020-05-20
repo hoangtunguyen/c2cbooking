@@ -6,10 +6,7 @@ import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -30,12 +27,12 @@ public class PaypalController {
     }
 
     @PostMapping("/pay")
-    public String payment() throws UnknownHostException {
+    public String payment(@ModelAttribute("price") String price) throws UnknownHostException {
         InetAddress inetAddress = InetAddress.getLocalHost();
         String ipComputer = inetAddress.getHostAddress();
-        System.out.println("IP ADDRESS: "+ipComputer);
+        System.out.println(price);
         try {
-            Payment payment = paypalService.createPayment(30.00, "USD", "paypal",
+            Payment payment = paypalService.createPayment(Double.parseDouble(price), "USD", "paypal",
                     "sale", "nothing", "http://"+ipComputer+":8080/" + CANCEL_URL,
                     "http://"+ipComputer+":8080/" + SUCCESS_URL);
             for(Links link:payment.getLinks()) {

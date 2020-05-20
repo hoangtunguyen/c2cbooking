@@ -29,9 +29,17 @@ public class RoomEntity {
     @Column(name = "service_fee")
     BigDecimal serviceFee;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_detail_id", nullable = false, unique = true)
-    RoomDetailEntity roomDetailEntity;
+    @Column(name = "guest_count")
+    Integer guestCount;
+
+    @Column(name = "bedroom_count")
+    Integer bedroomCount;
+
+    @Column(name = "bed_count")
+    Integer bedCount;
+
+    @Column(name = "bathroom_count")
+    Integer bathroomCount;
 
     @OneToOne
     @JoinColumn(name = "location_id", nullable = false, unique = true)
