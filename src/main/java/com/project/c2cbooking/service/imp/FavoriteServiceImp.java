@@ -41,5 +41,16 @@ public class FavoriteServiceImp implements FavoriteService {
         return list.stream().map(FavoriteConvert::convert).collect(Collectors.toList());
     }
 
+    @Override
+    public Boolean isExist(Integer userId, Integer roomId) {
+        return favoriteRepository.existsFavoriteRoomEntityByUserEntity_IdAndRoomEntity_Id(userId, roomId);
+    }
+
+    @Override
+    public void deleteFavorite(Integer userId, Integer roomId) {
+        FavoriteRoomEntity favorite = favoriteRepository.findByUserEntity_IdAndRoomEntity_Id(userId, roomId);
+        favoriteRepository.delete(favorite);
+    }
+
 
 }

@@ -9,4 +9,6 @@ import java.util.List;
 public interface FavoriteService {
     void addFavorite(FavoriteRequest favoriteRequest);
     List<FavoriteResponse> getFavoriteList(Integer userId);
+    Boolean isExist(Integer userId, Integer roomId);
+    void deleteFavorite(Integer userId, Integer roomId);
 }

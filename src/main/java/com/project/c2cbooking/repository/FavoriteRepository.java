@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface FavoriteRepository extends JpaRepository<FavoriteRoomEntity, Integer> {
     List<FavoriteRoomEntity> findAllByUserEntity_Id(Integer userId);
-
+    Boolean existsFavoriteRoomEntityByUserEntity_IdAndRoomEntity_Id(Integer userId, Integer roomId);
+    FavoriteRoomEntity findByUserEntity_IdAndRoomEntity_Id(Integer userId, Integer roomId);
 }

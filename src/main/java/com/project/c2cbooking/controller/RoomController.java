@@ -43,29 +43,42 @@ public class RoomController {
     }
 
     @GetMapping("/room/search")
-    public ResponseEntity<?> searchRoom(@RequestBody RoomRequest roomRequest){
-        List<RoomResponse> rooms = roomServiceImp.searchRoom(roomRequest);
+    public ResponseEntity<?> searchRoom(@RequestParam Integer guestCount, @RequestParam Integer minPrice, @RequestParam Integer maxPrice, String location, String nameRoom){
+        RoomRequest request = new RoomRequest();
+        request.setGuestCount(guestCount);
+        request.setMinPrice(minPrice);
+        request.setMaxPrice(maxPrice);
+        request.setLocation(location);
+        request.setNameRoom(nameRoom);
+        List<RoomResponse> rooms = roomServiceImp.searchRoom(request);
         return ResponseEntity.ok(rooms);
     }
 
 
-    @GetMapping("/room/listFavorite/{userId}")
-    public ResponseEntity<?> getListFavorite(@PathVariable Integer userId){
+    @GetMapping("/room/listFavorite")
+    public ResponseEntity<?> getListFavorite(@RequestParam Integer userId){
         List<FavoriteResponse> list = favoriteServiceImp.getFavoriteList(userId);
         return ResponseEntity.ok(list);
     }
-    @PostMapping("room/addFavorite")
-    public String addFavorite(@RequestBody FavoriteRequest favoriteRequest){
+    @PostMapping("room/addOrDeleteFavorite")
+    public String addOrDeleteFavorite(@RequestBody FavoriteRequest favoriteRequest){
         try {
-            favoriteServiceImp.addFavorite(favoriteRequest);
-            return "success";
+            if (!favoriteServiceImp.isExist(favoriteRequest.getUserId(), favoriteRequest.getRoomId())){
+                favoriteServiceImp.addFavorite(favoriteRequest);
+                return "added";
+            }
+            favoriteServiceImp.deleteFavorite(favoriteRequest.getUserId(), favoriteRequest.getRoomId());
+            return "deleted";
         }catch (Exception e){
             return ("Exception: " + e);
         }
     }
+    @GetMapping("room/isFavorite")
+    public boolean isFavorite(@RequestParam Integer userId, @RequestParam Integer roomId){
+        return  favoriteServiceImp.isExist(userId, roomId);
+    }
 
-
-    @PostMapping("/bookRoom")
+    @PostMapping("/booking")
     public String bookRoom(@RequestBody BookingRequest bookingRequest){
         try {
             bookingServiceImp.bookRoom(bookingRequest);
@@ -75,8 +88,8 @@ public class RoomController {
         }
     }
 
-    @GetMapping("/booking/user/{userId}")
-    public ResponseEntity<?> getBookingByUserId(@PathVariable Integer userId){
+    @GetMapping("/booking/list")
+    public ResponseEntity<?> getBookingByUserId(@RequestParam Integer userId){
             List<BookingResponse> responses = bookingServiceImp.getBookingByUserId(userId);
             return ResponseEntity.ok(responses);
     }
