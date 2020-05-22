@@ -17,4 +17,6 @@ public class RoomResponse {
     BigDecimal price;
     String urlImage;
     String city;
+    double lat;
+    double lng;
 }

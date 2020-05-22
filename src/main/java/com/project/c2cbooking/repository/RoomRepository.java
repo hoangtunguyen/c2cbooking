@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 
 public interface RoomRepository extends JpaRepository<RoomEntity, Integer> {
@@ -20,7 +21,7 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Integer> {
 
     @Query(value = "SELECT ro FROM RoomEntity ro " +
             "inner join ro.locationEntity lo " +
-            "inner join  ro.locationEntity.cityEntity lo_ci " +
-            "where ro.guestCount <= ?1 and (ro.price between  ?2  and  ?3) and (lo.street like %?4% or lo_ci.name like %?4%) and ro.name like %?5% ")
-    List<RoomEntity> searchRoom(Integer guestCount, BigDecimal minPrice, BigDecimal maxPrice, String location, String name);
+            "inner join ro.locationEntity.cityEntity lo_ci " +
+            "where ro.guestCount <= ?1 and (ro.price between  ?2  and  ?3) and (lo.street like %?4% or lo_ci.name like %?4%) and ro.name like %?5% and ro.categoryEntity.roomTypeEntity.id in ?6")
+    List<RoomEntity> searchRoom(Integer guestCount, BigDecimal minPrice, BigDecimal maxPrice, String location, String name, Collection<Integer> roomTypeId);
 }

@@ -25,6 +25,8 @@ public class RoomConvert {
         roomResponse.setVotedCount(roomEntity.getReviewEntities().size());
         roomResponse.setRating(roomEntity.getReviewEntities().isEmpty()? DEFAULT_RATING : Util.formatNumber(String.valueOf(avgRating(roomEntity))));
         roomResponse.setCity(roomEntity.getLocationEntity().getCityEntity().getName());
+        roomResponse.setLat(Double.parseDouble(roomEntity.getLocationEntity().getLat()));
+        roomResponse.setLng(Double.parseDouble(roomEntity.getLocationEntity().getLng()));
         return roomResponse;
     }
     public static RoomFullResponse convertFullData(RoomEntity roomEntity){

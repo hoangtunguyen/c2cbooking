@@ -37,7 +37,7 @@ public class FavoriteServiceImp implements FavoriteService {
 
     @Override
     public List<FavoriteResponse> getFavoriteList(Integer userId) {
-        List<FavoriteRoomEntity> list = favoriteRepository.findAllByUserEntity_Id(userId);
+        List<FavoriteRoomEntity> list = favoriteRepository.findAllByUserEntity_IdOrderByIdDesc(userId);
         return list.stream().map(FavoriteConvert::convert).collect(Collectors.toList());
     }
 
