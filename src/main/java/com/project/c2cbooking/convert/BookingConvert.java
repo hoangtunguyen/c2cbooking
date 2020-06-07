@@ -12,9 +12,10 @@ public class BookingConvert {
         response.setCheckOutDate(Util.convertTimestampToString(bookingEntity.getCheckOutDate()));
         response.setBookingDate(Util.convertTimestampToString(bookingEntity.getBookingDate()));
         response.setTotalCost(bookingEntity.getTotalCost());
-        response.setRoomResponse(RoomConvert.convert(bookingEntity.getRoomEntity()));
+        response.setRoomResponse(RoomConvert.convertFullData(bookingEntity.getRoomEntity()));
         response.setGuestCount(bookingEntity.getGuestCount());
         response.setInfantCount(bookingEntity.getInfantCount());
+        response.setNameGuest(bookingEntity.getUserEntity().getUsername());
         return response;
     }
 }

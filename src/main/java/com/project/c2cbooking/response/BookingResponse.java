@@ -7,10 +7,11 @@ import java.math.BigDecimal;
 @Data
 public class BookingResponse {
     Integer Id;
+    String nameGuest;
     String checkInDate;
     String checkOutDate;
     String bookingDate;
-    RoomResponse roomResponse;
+    RoomFullResponse roomResponse;
     BigDecimal totalCost;
     Integer guestCount;
     Integer infantCount;

@@ -19,6 +19,7 @@ public class RoomFullResponse {
     String urlImage;
 
     String address;
+    String city;
     double lat;
     double lng;
 

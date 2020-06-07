@@ -54,4 +54,10 @@ public class BookingServiceImp implements BookingService {
         return list.stream().map(BookingConvert ::convert).collect(Collectors.toList());
     }
 
+    @Override
+    public BookingResponse getDetailBooking(Integer bookingId) {
+        BookingEntity bookingEntity = bookingRepository.findById(bookingId).get();
+        return BookingConvert.convert(bookingEntity);
+    }
+
 }

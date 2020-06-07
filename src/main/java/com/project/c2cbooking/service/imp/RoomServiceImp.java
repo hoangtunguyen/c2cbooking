@@ -5,8 +5,11 @@ import com.project.c2cbooking.convert.RoomConvert;
 import com.project.c2cbooking.model.AmenityEntity;
 import com.project.c2cbooking.model.RoomEntity;
 import com.project.c2cbooking.model.RoomTypeEntity;
+import com.project.c2cbooking.model.UserEntity;
 import com.project.c2cbooking.repository.RoomRepository;
 import com.project.c2cbooking.repository.RoomTypeRepository;
+import com.project.c2cbooking.repository.UserRepository;
+import com.project.c2cbooking.request.AddRoomRequest;
 import com.project.c2cbooking.request.RoomRequest;
 import com.project.c2cbooking.response.AmenityResponse;
 import com.project.c2cbooking.response.RoomFullResponse;
@@ -30,6 +33,9 @@ public class RoomServiceImp implements RoomService {
     private RoomRepository roomRepository;
     @Autowired
     private RoomTypeServiceImp roomTypeServiceImp;
+
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public List<RoomResponse> topFavoriteRooms(Integer count) {
         List<RoomEntity> roomEntities = roomRepository.findTopFavoritesLimit(count);
@@ -70,5 +76,28 @@ public class RoomServiceImp implements RoomService {
                 roomRequest.getRoomTypeId()
                 );
         return roomEntities.stream().map(RoomConvert::convert).collect(Collectors.toList());
+    }
+
+    @Override
+    public void addRoom(AddRoomRequest request) {
+        RoomEntity entity = new RoomEntity();
+        entity.setName(request.getRoomName());
+        entity.setPrice(request.getPrice());
+        entity.setServiceFee(request.getServiceFee());
+        entity.setGuestCount(request.getGuestCount());
+        entity.setBedCount(request.getBedCount());
+        entity.setBedroomCount(request.getBedroomCount());
+        entity.setBathroomCount(request.getBathroomCount());
+
+        UserEntity user = userRepository.findById(request.getOwnerId()).get();
+        entity.setUserEntity(user);
+
+
+        entity.setDescription(request.getDescription());
+        entity.setMinGuestCount(request.getMinGuestCount());
+        entity.setFeeIncreasingPerson(request.getFeeIncreasingPerson());
+
+        roomRepository.save(entity);
+
     }
 }
