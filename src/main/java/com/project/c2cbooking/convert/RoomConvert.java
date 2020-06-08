@@ -20,7 +20,7 @@ public class RoomConvert {
         roomResponse.setId(roomEntity.getId());
         roomResponse.setName(roomEntity.getName());
         roomResponse.setPrice(new BigDecimal(Util.formatNumber(roomEntity.getPrice().toString())));
-        roomResponse.setCategoryRoom(roomEntity.getCategoryEntity().getName());
+        roomResponse.setTypeRoom(roomEntity.getRoomTypeEntity().getName());
         roomResponse.setUrlImage(roomEntity.getPhotoEntities().isEmpty() ? null : roomEntity.getPhotoEntities().get(0).getUrl());
         roomResponse.setVotedCount(roomEntity.getReviewEntities().size());
         roomResponse.setRating(roomEntity.getReviewEntities().isEmpty()? DEFAULT_RATING : Util.formatNumber(String.valueOf(avgRating(roomEntity))));
@@ -34,7 +34,7 @@ public class RoomConvert {
         roomFullResponse.setId(roomEntity.getId());
         roomFullResponse.setName(roomEntity.getName());
         roomFullResponse.setPrice(new BigDecimal(Util.formatNumber(roomEntity.getPrice().toString())));
-        roomFullResponse.setCategoryRoom(roomEntity.getCategoryEntity().getName());
+        roomFullResponse.setTypeRoom(roomEntity.getRoomTypeEntity().getName());
         roomFullResponse.setUrlImage(roomEntity.getPhotoEntities().isEmpty() ? null : roomEntity.getPhotoEntities().get(0).getUrl());
         roomFullResponse.setVotedCount(roomEntity.getReviewEntities().size());
         roomFullResponse.setRating(roomEntity.getReviewEntities().isEmpty()? DEFAULT_RATING : Util.formatNumber(String.valueOf(avgRating(roomEntity))));

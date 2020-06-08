@@ -1,6 +1,7 @@
 package com.project.c2cbooking.controller;
 
 import com.project.c2cbooking.model.FavoriteRoomEntity;
+import com.project.c2cbooking.request.AddRoomRequest;
 import com.project.c2cbooking.request.BookingRequest;
 import com.project.c2cbooking.request.FavoriteRequest;
 import com.project.c2cbooking.request.RoomRequest;
@@ -114,4 +115,7 @@ public class RoomController {
     public ResponseEntity<?> getBookingDetail(@RequestParam Integer bookingId) {
         return ResponseEntity.ok(bookingServiceImp.getDetailBooking(bookingId));
     }
+
+
+
 }

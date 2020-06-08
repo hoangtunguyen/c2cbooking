@@ -1,5 +1,6 @@
 package com.project.c2cbooking.controller;
 
+import com.project.c2cbooking.repository.RoomRepository;
 import com.project.c2cbooking.request.AuthenticationRequest;
 import com.project.c2cbooking.response.AuthenticationResponse;
 import com.project.c2cbooking.response.RoomResponse;
@@ -21,10 +22,18 @@ public class HomeController {
 //
 //    @Autowired
 //    private JwtUtil  jwtUtil;
+    @Autowired
+    private RoomRepository roomRepository;
+    @DeleteMapping(value = "/delete/{id}")
+    public void deletePost(@PathVariable Integer id) {
 
-    @GetMapping("/user")
-    public String user(){
-        return ("<h1>User</h1");
+        roomRepository.deleteById(id);
+
+//        if (!isRemoved) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//
+//        return new ResponseEntity<>(id, HttpStatus.OK);
     }
     @GetMapping("/admin")
     public String admin(){

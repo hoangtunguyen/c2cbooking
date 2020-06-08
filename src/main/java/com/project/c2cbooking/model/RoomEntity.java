@@ -41,8 +41,8 @@ public class RoomEntity {
     @Column(name = "bathroom_count")
     Integer bathroomCount;
 
-    @OneToOne
-    @JoinColumn(name = "location_id", nullable = false, unique = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id", unique = true)
     LocationEntity locationEntity;
 
     @ManyToOne
@@ -50,8 +50,8 @@ public class RoomEntity {
     UserEntity userEntity;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    CategoryEntity categoryEntity;
+    @JoinColumn(name = "room_type_id")
+    RoomTypeEntity roomTypeEntity;
 
     @Column(name = "note")
     String note;
@@ -68,18 +68,18 @@ public class RoomEntity {
     @Column(name = "del_flag", columnDefinition="BOOLEAN DEFAULT false")
     Boolean delFlag;
 
-    @OneToMany(mappedBy = "roomEntity")
+    @OneToMany(mappedBy = "roomEntity", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
     List<PhotoEntity> photoEntities;
 
-    @OneToMany(mappedBy = "roomEntity")
+    @OneToMany(mappedBy = "roomEntity", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
     List<ReviewEntity> reviewEntities;
 
-    @OneToMany(mappedBy = "roomEntity")
+    @OneToMany(mappedBy = "roomEntity", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
     List<RoomAmenityEntity> roomAmenityEntities;
 
-    @OneToMany(mappedBy = "roomEntity")
+    @OneToMany(mappedBy = "roomEntity", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
     List<BookingEntity> bookingEntities;
 
-    @OneToMany(mappedBy = "roomEntity")
+    @OneToMany(mappedBy = "roomEntity", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
     List<FavoriteRoomEntity> favoriteRoomEntities;
 }

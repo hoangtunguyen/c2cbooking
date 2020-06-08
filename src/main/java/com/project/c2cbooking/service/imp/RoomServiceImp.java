@@ -2,19 +2,13 @@ package com.project.c2cbooking.service.imp;
 
 import com.project.c2cbooking.convert.AmenityConvert;
 import com.project.c2cbooking.convert.RoomConvert;
-import com.project.c2cbooking.model.AmenityEntity;
-import com.project.c2cbooking.model.RoomEntity;
-import com.project.c2cbooking.model.RoomTypeEntity;
-import com.project.c2cbooking.model.UserEntity;
-import com.project.c2cbooking.repository.RoomRepository;
-import com.project.c2cbooking.repository.RoomTypeRepository;
-import com.project.c2cbooking.repository.UserRepository;
+import com.project.c2cbooking.model.*;
+import com.project.c2cbooking.model.location.CityEntity;
+import com.project.c2cbooking.model.location.LocationEntity;
+import com.project.c2cbooking.repository.*;
 import com.project.c2cbooking.request.AddRoomRequest;
 import com.project.c2cbooking.request.RoomRequest;
-import com.project.c2cbooking.response.AmenityResponse;
-import com.project.c2cbooking.response.RoomFullResponse;
-import com.project.c2cbooking.response.RoomResponse;
-import com.project.c2cbooking.response.RoomTypeResponse;
+import com.project.c2cbooking.response.*;
 import com.project.c2cbooking.service.RoomService;
 import com.project.c2cbooking.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +22,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoomServiceImp implements RoomService {
+    private  final static Integer DEFAULT_RATING = 3;
+    private  final static String DEFAULT_COMMENT = "Good";
 
     @Autowired
     private RoomRepository roomRepository;
@@ -36,6 +32,27 @@ public class RoomServiceImp implements RoomService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoomTypeRepository roomTypeRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
+    private PhotoRepository photoRepository;
+
+    @Autowired
+    private RoomAmenityRepository roomAmenityRepository;
+
+    @Autowired
+    private AmenityRepository amenityRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     @Override
     public List<RoomResponse> topFavoriteRooms(Integer count) {
         List<RoomEntity> roomEntities = roomRepository.findTopFavoritesLimit(count);
@@ -89,15 +106,70 @@ public class RoomServiceImp implements RoomService {
         entity.setBedroomCount(request.getBedroomCount());
         entity.setBathroomCount(request.getBathroomCount());
 
+        LocationEntity locationEntity = new LocationEntity();
+        locationEntity.setLat(request.getLocation().getLat());
+        locationEntity.setLng(request.getLocation().getLng());
+        locationEntity.setStreet(request.getLocation().getStreet());
+        CityEntity cityEntity = cityRepository.findById(request.getLocation().getCityId()).get();
+
+        locationEntity.setCityEntity(cityEntity);
+        entity.setLocationEntity(locationEntity);
+
         UserEntity user = userRepository.findById(request.getOwnerId()).get();
         entity.setUserEntity(user);
 
 
+        RoomTypeEntity roomType = roomTypeRepository.findById(request.getRoomTypeId()).get();
+        entity.setRoomTypeEntity(roomType);
+
         entity.setDescription(request.getDescription());
         entity.setMinGuestCount(request.getMinGuestCount());
         entity.setFeeIncreasingPerson(request.getFeeIncreasingPerson());
+        entity.setDelFlag(false);
+        RoomEntity roomEntity = roomRepository.save(entity);
 
-        roomRepository.save(entity);
+        PhotoEntity photoEntity = new PhotoEntity();
+        photoEntity.setUrl(request.getUrlImage());
+        photoEntity.setRoomEntity(roomEntity);
+        photoEntity.setDelFlag(false);
+        photoRepository.save(photoEntity);
 
+        List<RoomAmenityEntity> RAList = new ArrayList<>();
+        for (Integer amenityId : request.getAmenityIdList()){
+            RoomAmenityEntity roomAmenityEntity = new RoomAmenityEntity();
+            roomAmenityEntity.setRoomEntity(roomEntity);
+            roomAmenityEntity.setAmenityEntity(amenityRepository.findById(amenityId).get());
+            roomAmenityEntity.setDel_flag(false);
+            RAList.add(roomAmenityEntity);
+        }
+        roomAmenityRepository.saveAll(RAList);
+
+
+        ReviewEntity reviewEntity = new ReviewEntity();
+        reviewEntity.setRoomEntity(roomEntity);
+        reviewEntity.setDelFlag(false);
+        reviewEntity.setUserEntity(user);
+        reviewEntity.setRating(DEFAULT_RATING);
+        reviewEntity.setComment(DEFAULT_COMMENT);
+        reviewRepository.save(reviewEntity);
     }
+
+    @Override
+    public List<HostListingResponse> getListRoomsByUserId(Integer id) {
+        List<RoomEntity> list= roomRepository.findAllByUserEntity_Id(id);
+
+        return list.stream().map(room -> {
+            HostListingResponse response = new HostListingResponse();
+            response.setRoomResponse(RoomConvert.convert(room));
+            response.setCountBooking(room != null && room.getBookingEntities()!= null ? room.getBookingEntities().size() : 0);
+            BigDecimal totalMoney = new BigDecimal(0);
+            for (BookingEntity booking : room.getBookingEntities()){
+                totalMoney = totalMoney.add(booking.getTotalCost());
+            }
+            response.setTotalMoney(totalMoney);
+            return response;
+        }).collect(Collectors.toList());
+    }
+
+
 }

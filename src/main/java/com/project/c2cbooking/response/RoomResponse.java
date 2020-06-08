@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class RoomResponse {
     Integer id;
     String name;
-    String categoryRoom;
+    String typeRoom;
     Integer votedCount;
     String rating;
     BigDecimal price;

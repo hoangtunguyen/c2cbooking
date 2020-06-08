@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomTypeEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_type_id")
@@ -28,6 +27,6 @@ public class RoomTypeEntity {
     Boolean delFlag;
 
     @OneToMany(mappedBy = "roomTypeEntity")
-    List<CategoryEntity> categoryEntities;
+    List<RoomEntity> roomEntities;
 
 }

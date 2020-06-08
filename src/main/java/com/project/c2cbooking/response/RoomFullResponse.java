@@ -12,7 +12,7 @@ import java.util.List;
 public class RoomFullResponse {
     Integer id;
     String name;
-    String categoryRoom;
+    String typeRoom;
     Integer votedCount;
     String rating;
     BigDecimal price;

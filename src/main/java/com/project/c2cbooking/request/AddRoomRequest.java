@@ -14,16 +14,16 @@ public class AddRoomRequest {
     String roomName;
     BigDecimal price;
     BigDecimal serviceFee;
-    Integer minGuestCount;
-    BigDecimal feeIncreasingPerson;
     Integer guestCount;
     Integer bedroomCount;
     Integer bedCount;
     Integer bathroomCount;
+    LocationRequest location;
+    Integer ownerId;
+    Integer roomTypeId;
     String description;
+    Integer minGuestCount;
+    BigDecimal feeIncreasingPerson;
     List<Integer> amenityIdList;
     String urlImage;
-    Integer ownerId;
-
-
 }
