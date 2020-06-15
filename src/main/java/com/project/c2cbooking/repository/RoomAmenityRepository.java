@@ -4,4 +4,5 @@ import com.project.c2cbooking.model.RoomAmenityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoomAmenityRepository extends JpaRepository<RoomAmenityEntity, Integer> {
+    void deleteByRoomEntity_Id(Integer roomId);
 }

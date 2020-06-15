@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +59,13 @@ public class BookingServiceImp implements BookingService {
     public BookingResponse getDetailBooking(Integer bookingId) {
         BookingEntity bookingEntity = bookingRepository.findById(bookingId).get();
         return BookingConvert.convert(bookingEntity);
+    }
+
+    @Override
+    public List<BookingResponse> getBookingByOwnerIdAndCheckInDate(Integer ownerId, String checkInDate) {
+        Timestamp checkInDateTime = Util.convertStringToTimestamp(checkInDate);
+        List<BookingEntity> list = bookingRepository.findAllByRoomEntity_UserEntity_IdAndCheckInDate(ownerId,checkInDateTime);
+        return list.stream().map(BookingConvert::convert).collect(Collectors.toList());
     }
 
 }

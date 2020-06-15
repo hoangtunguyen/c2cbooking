@@ -14,6 +14,7 @@ import com.project.c2cbooking.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional // Also, note that we need to use the @Transactional annotation for delete methods.
 public class RoomServiceImp implements RoomService {
     private  final static Integer DEFAULT_RATING = 3;
     private  final static String DEFAULT_COMMENT = "Good";
@@ -98,6 +100,12 @@ public class RoomServiceImp implements RoomService {
     @Override
     public void addRoom(AddRoomRequest request) {
         RoomEntity entity = new RoomEntity();
+        if (request.getRoomId() != null){
+            entity.setId(request.getRoomId());
+            photoRepository.deleteByRoomEntity_Id(request.getRoomId());
+            roomAmenityRepository.deleteByRoomEntity_Id(request.getRoomId());
+        }
+
         entity.setName(request.getRoomName());
         entity.setPrice(request.getPrice());
         entity.setServiceFee(request.getServiceFee());
@@ -128,20 +136,27 @@ public class RoomServiceImp implements RoomService {
         entity.setDelFlag(false);
         RoomEntity roomEntity = roomRepository.save(entity);
 
+
+
         PhotoEntity photoEntity = new PhotoEntity();
         photoEntity.setUrl(request.getUrlImage());
         photoEntity.setRoomEntity(roomEntity);
         photoEntity.setDelFlag(false);
         photoRepository.save(photoEntity);
 
+
+
         List<RoomAmenityEntity> RAList = new ArrayList<>();
         for (Integer amenityId : request.getAmenityIdList()){
+
             RoomAmenityEntity roomAmenityEntity = new RoomAmenityEntity();
             roomAmenityEntity.setRoomEntity(roomEntity);
             roomAmenityEntity.setAmenityEntity(amenityRepository.findById(amenityId).get());
             roomAmenityEntity.setDel_flag(false);
             RAList.add(roomAmenityEntity);
         }
+
+
         roomAmenityRepository.saveAll(RAList);
 
 
