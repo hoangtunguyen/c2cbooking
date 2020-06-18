@@ -7,6 +7,7 @@ import com.project.c2cbooking.model.location.CityEntity;
 import com.project.c2cbooking.model.location.LocationEntity;
 import com.project.c2cbooking.repository.*;
 import com.project.c2cbooking.request.AddRoomRequest;
+import com.project.c2cbooking.request.LocationRequest;
 import com.project.c2cbooking.request.RoomRequest;
 import com.project.c2cbooking.response.*;
 import com.project.c2cbooking.service.RoomService;
@@ -184,6 +185,44 @@ public class RoomServiceImp implements RoomService {
             response.setTotalMoney(totalMoney);
             return response;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public AddRoomRequest getRoomDetailForUpdating(Integer roomId) {
+        RoomEntity roomEntity = roomRepository.findByIdEquals(roomId);
+        AddRoomRequest request = new AddRoomRequest();
+        request.setRoomId(roomEntity.getId());
+        request.setRoomName(roomEntity.getName());
+        request.setPrice(roomEntity.getPrice());
+        request.setServiceFee(roomEntity.getServiceFee());
+        request.setGuestCount(roomEntity.getGuestCount());
+        request.setBedroomCount(roomEntity.getBedroomCount());
+        request.setBedCount(roomEntity.getBedCount());
+        request.setBathroomCount(roomEntity.getBathroomCount());
+
+        LocationRequest locationRequest = new LocationRequest();
+        locationRequest.setStreet(roomEntity.getLocationEntity().getStreet());
+        locationRequest.setCityId(roomEntity.getLocationEntity().getCityEntity().getId());
+        locationRequest.setLat(roomEntity.getLocationEntity().getLat());
+        locationRequest.setLng(roomEntity.getLocationEntity().getLng());
+
+        request.setLocation(locationRequest);
+        request.setOwnerId(roomEntity.getUserEntity().getId());
+        request.setRoomTypeId(roomEntity.getRoomTypeEntity().getId());
+        request.setDescription(roomEntity.getDescription());
+        request.setMinGuestCount(roomEntity.getMinGuestCount());
+        request.setFeeIncreasingPerson(roomEntity.getFeeIncreasingPerson());
+
+        List<Integer> amenityIdList = new ArrayList<>();
+        for (RoomAmenityEntity roomAmenityEntity : roomEntity.getRoomAmenityEntities()){
+            amenityIdList.add(roomAmenityEntity.getAmenityEntity().getId());
+        }
+        request.setAmenityIdList(amenityIdList);
+        request.setUrlImage(roomEntity.getPhotoEntities().get(0).getUrl());
+
+
+
+        return request;
     }
 
 

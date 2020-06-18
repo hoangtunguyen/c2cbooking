@@ -17,4 +17,6 @@ public interface RoomService {
 
 
     List<HostListingResponse> getListRoomsByUserId(Integer id);
+
+    AddRoomRequest getRoomDetailForUpdating(Integer roomId);
 }

@@ -116,6 +116,10 @@ public class RoomController {
         return ResponseEntity.ok(bookingServiceImp.getDetailBooking(bookingId));
     }
 
-
+    @GetMapping("/room/update")
+    public ResponseEntity<?> getDateForUpdatingRoom(@RequestParam Integer roomId){
+        AddRoomRequest request = roomServiceImp.getRoomDetailForUpdating(roomId);
+        return  ResponseEntity.ok(request);
+    }
 
 }
