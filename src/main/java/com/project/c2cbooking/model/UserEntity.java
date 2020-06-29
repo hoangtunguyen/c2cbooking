@@ -22,6 +22,8 @@ public class UserEntity {
     String password;
     @Column(name = "email")
     String email;
+    @Column(name = "url_image")
+    String urlImage;
     @ManyToOne
     @JoinColumn(name = "role")
     RoleEntity role;

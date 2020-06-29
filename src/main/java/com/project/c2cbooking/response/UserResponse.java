@@ -7,4 +7,5 @@ public class UserResponse {
     Integer userId;
     String userName;
     String email;
+    String urlImage;
 }

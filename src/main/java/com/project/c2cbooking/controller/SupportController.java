@@ -7,14 +7,12 @@ import com.project.c2cbooking.response.AmenityResponse;
 import com.project.c2cbooking.response.CityResponse;
 import com.project.c2cbooking.response.UserResponse;
 import com.project.c2cbooking.service.CityService;
+import com.project.c2cbooking.service.UserService;
 import com.project.c2cbooking.service.imp.AmenityServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +24,9 @@ public class SupportController {
 
     @Autowired
     private AmenityServiceImp amenityServiceImp;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -56,4 +57,9 @@ public class SupportController {
         return ResponseEntity.ok(responses);
     }
 
-}
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(@RequestParam Integer id) {
+        return ResponseEntity.ok(userService.getUser(id));
+    }
+
+    }
